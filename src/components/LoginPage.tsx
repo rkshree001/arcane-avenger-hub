@@ -77,7 +77,7 @@ const LoginPage = () => {
               
               <div>
                 <h1 className="text-5xl lg:text-6xl font-bold mb-4">
-                  <span className="bg-gradient-to-r from-primary via-accent to-hero-blue bg-clip-text text-transparent">
+                  <span className="bg-gradient-to-r from-primary via-accent to-accent bg-clip-text text-transparent">
                     Magical Heroes
                   </span>
                 </h1>

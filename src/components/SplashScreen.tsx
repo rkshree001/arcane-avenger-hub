@@ -45,14 +45,14 @@ const SplashScreen = () => {
               alt="Magical Heroes Logo"
               className="w-40 h-40 mx-auto float magical-glow rounded-full border-4 border-primary/30"
             />
-            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-hero-blue opacity-30 blur-2xl animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary via-accent to-accent opacity-30 blur-2xl animate-pulse"></div>
             <div className="absolute -inset-4 rounded-full border border-primary/20 animate-spin" style={{ animationDuration: '8s' }}></div>
             <div className="absolute -inset-8 rounded-full border border-accent/20 animate-spin" style={{ animationDuration: '12s', animationDirection: 'reverse' }}></div>
           </div>
         </div>
         
         <div className="space-y-6 relative z-10">
-          <h1 className="text-6xl font-bold bg-gradient-to-r from-primary via-accent to-hero-blue bg-clip-text text-transparent animate-pulse">
+          <h1 className="text-6xl font-bold bg-gradient-to-r from-primary via-accent to-accent bg-clip-text text-transparent animate-pulse">
             Magical Heroes
           </h1>
           <div className="relative">
@@ -65,7 +65,7 @@ const SplashScreen = () => {
           <div className="flex justify-center space-x-3 mt-12">
             <div className="w-3 h-3 rounded-full bg-primary animate-bounce"></div>
             <div className="w-3 h-3 rounded-full bg-accent animate-bounce" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-3 h-3 rounded-full bg-hero-blue animate-bounce" style={{ animationDelay: '0.4s' }}></div>
+            <div className="w-3 h-3 rounded-full bg-accent animate-bounce" style={{ animationDelay: '0.4s' }}></div>
           </div>
           
           <div className="mt-8">
