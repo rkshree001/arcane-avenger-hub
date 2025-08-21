@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { Card } from '@/components/ui/card';
+import { Button } from '@/components/ui/button';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
 import { Badge } from '@/components/ui/badge';
 import { 
@@ -13,7 +15,8 @@ import {
   Home,
   Scroll,
   Swords,
-  User
+  User,
+  Menu
 } from 'lucide-react';
 import Sidebar from './Sidebar';
 import SpellsLibrary from './SpellsLibrary';
@@ -28,6 +31,7 @@ import MarvelModule from './MarvelModule';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('home');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const quickAccessCards = [
     {
@@ -121,20 +125,20 @@ const Dashboard = () => {
           <div className="space-y-8">
             {/* Welcome Section */}
             <div className="magic-card">
-              <div className="flex items-center gap-6 mb-6">
-                <Avatar className="h-20 w-20 border-2 border-primary magical-glow">
-                  <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-2xl font-bold">
+              <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mb-6">
+                <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-primary magical-glow">
+                  <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-xl sm:text-2xl font-bold">
                     MH
                   </AvatarFallback>
                 </Avatar>
-                <div>
-                  <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                <div className="text-center sm:text-left">
+                  <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
                     Welcome back, Magical Hero!
                   </h1>
-                  <p className="text-muted-foreground text-lg">
+                  <p className="text-muted-foreground text-base sm:text-lg">
                     Ready for your next adventure?
                   </p>
-                  <div className="flex gap-2 mt-2">
+                  <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-2">
                     <Badge variant="outline" className="border-primary text-primary">
                       <Wand2 className="h-3 w-3 mr-1" />
                       Level 42 Wizard
@@ -169,7 +173,7 @@ const Dashboard = () => {
                 <Zap className="h-6 w-6 text-accent" />
                 Quick Access
               </h2>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
                 {quickAccessCards.map((card) => {
                   const Icon = card.icon;
                   return (
@@ -195,9 +199,37 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen flex bg-background">
-      <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} />
+      {/* Desktop Sidebar */}
+      <div className="hidden lg:block">
+        <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} />
+      </div>
       
-      <main className="flex-1 p-6 ml-72 overflow-y-auto">
+      {/* Mobile Header */}
+      <div className="lg:hidden fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
+        <div className="flex items-center justify-between p-4">
+          <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+            Magical Heroes
+          </h1>
+          <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Menu className="h-6 w-6" />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="left" className="p-0 w-72">
+              <Sidebar 
+                activeModule={activeModule} 
+                setActiveModule={(module) => {
+                  setActiveModule(module);
+                  setMobileMenuOpen(false);
+                }}
+              />
+            </SheetContent>
+          </Sheet>
+        </div>
+      </div>
+      
+      <main className="flex-1 p-4 lg:p-6 lg:ml-72 pt-20 lg:pt-6 overflow-y-auto">
         {renderContent()}
       </main>
     </div>

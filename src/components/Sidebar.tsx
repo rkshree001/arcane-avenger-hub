@@ -43,7 +43,7 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-72 bg-sidebar-background border-r border-sidebar-border magic-card shadow-xl z-30">
+    <aside className="h-full w-72 bg-sidebar-background border-r border-sidebar-border magic-card shadow-xl lg:fixed lg:left-0 lg:top-0 lg:z-30">
       <div className="flex flex-col h-full p-6">
         {/* Logo Section */}
         <div className="flex items-center gap-3 mb-8 pb-4 border-b border-sidebar-border">
