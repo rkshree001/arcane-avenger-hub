@@ -214,6 +214,104 @@ All colors MUST be HSL.
     50% { transform: translateY(-10px); }
   }
 
+  /* Advanced Magical Animations */
+  .levitate {
+    animation: levitate 4s ease-in-out infinite;
+  }
+
+  @keyframes levitate {
+    0%, 100% { 
+      transform: translateY(0px) rotate(0deg);
+      filter: brightness(1);
+    }
+    50% { 
+      transform: translateY(-15px) rotate(2deg);
+      filter: brightness(1.1);
+    }
+  }
+
+  /* Magical Shimmer Effect */
+  .shimmer {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .shimmer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 3s infinite;
+  }
+
+  @keyframes shimmer {
+    0% { left: -100%; }
+    100% { left: 100%; }
+  }
+
+  /* Magical Particle Effect */
+  .particles {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .particles::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+      radial-gradient(2px 2px at 20px 30px, hsl(45 100% 65%), transparent),
+      radial-gradient(2px 2px at 40px 70px, hsl(270 60% 70%), transparent),
+      radial-gradient(1px 1px at 90px 40px, hsl(220 100% 75%), transparent),
+      radial-gradient(1px 1px at 130px 80px, hsl(5 85% 70%), transparent);
+    background-repeat: repeat;
+    background-size: 150px 100px;
+    animation: particles 20s linear infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes particles {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-100px); }
+  }
+
+  /* Heroic Glow Pulse */
+  .heroic-pulse {
+    animation: heroic-pulse 3s ease-in-out infinite;
+  }
+
+  @keyframes heroic-pulse {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(220 100% 55% / 0.3);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(220 100% 55% / 0.6), 0 0 60px hsl(220 100% 55% / 0.3);
+      transform: scale(1.05);
+    }
+  }
+
+  /* Magical Text Glow */
+  .text-glow {
+    text-shadow: 0 0 10px hsl(45 100% 65% / 0.8), 0 0 20px hsl(45 100% 65% / 0.4);
+  }
+
+  /* Advanced Hover Effects */
+  .hover-lift {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-lift:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px hsl(240 25% 3% / 0.4);
+  }
+
   /* Magical Card */
   .magic-card {
     @apply bg-card border border-border rounded-lg p-4 md:p-6;

@@ -16,18 +16,24 @@ import {
   Scroll,
   Swords,
   User,
-  Menu
+  Menu,
+  Sparkles,
+  Clock,
+  Bell
 } from 'lucide-react';
 import Sidebar from './Sidebar';
 import SpellsLibrary from './SpellsLibrary';
 import QuestsModule from './QuestsModule';
 import HouseTeamModule from './HouseTeamModule';
-import TrainingModule from './TrainingModule';
+import EnhancedTrainingModule from './EnhancedTrainingModule';
 import LeaderboardModule from './LeaderboardModule';
 import GuildModule from './GuildModule';
 import ProfileModule from './ProfileModule';
 import HarryPotterModule from './HarryPotterModule';
 import MarvelModule from './MarvelModule';
+import NewsSection from './NewsSection';
+import WeatherWidget from './WeatherWidget';
+import ActivityFeed from './ActivityFeed';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('home');
@@ -108,7 +114,7 @@ const Dashboard = () => {
       case 'sorting':
         return <HouseTeamModule />;
       case 'training':
-        return <TrainingModule />;
+        return <EnhancedTrainingModule />;
       case 'leaderboard':
         return <LeaderboardModule />;
       case 'guild':
@@ -123,46 +129,64 @@ const Dashboard = () => {
       default:
         return (
           <div className="space-y-8">
-            {/* Welcome Section */}
-            <div className="magic-card">
+            {/* Enhanced Welcome Section */}
+            <div className="magic-card particles">
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mb-6">
-                <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-primary magical-glow">
+                <Avatar className="h-16 w-16 sm:h-20 sm:w-20 border-2 border-primary magical-glow levitate">
                   <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-xl sm:text-2xl font-bold">
                     MH
                   </AvatarFallback>
                 </Avatar>
                 <div className="text-center sm:text-left">
-                  <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  <h1 className="text-2xl sm:text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent text-glow">
                     Welcome back, Magical Hero!
                   </h1>
                   <p className="text-muted-foreground text-base sm:text-lg">
-                    Ready for your next adventure?
+                    Ready for your next legendary adventure?
                   </p>
                   <div className="flex flex-wrap justify-center sm:justify-start gap-2 mt-2">
-                    <Badge variant="outline" className="border-primary text-primary">
+                    <Badge variant="outline" className="border-primary text-primary shimmer">
                       <Wand2 className="h-3 w-3 mr-1" />
                       Level 42 Wizard
                     </Badge>
-                    <Badge variant="outline" className="border-hero-blue text-hero-blue">
+                    <Badge variant="outline" className="border-hero-blue text-hero-blue heroic-pulse">
                       <Shield className="h-3 w-3 mr-1" />
                       Avenger
                     </Badge>
+                    <Badge variant="outline" className="border-accent text-accent">
+                      <Clock className="h-3 w-3 mr-1" />
+                      Online
+                    </Badge>
                   </div>
+                </div>
+                <div className="flex flex-col gap-2 sm:ml-auto">
+                  <Button size="sm" variant="outline" className="text-xs">
+                    <Bell className="h-3 w-3 mr-1" />
+                    3 New
+                  </Button>
+                  <Button size="sm" className="btn-magical text-xs">
+                    <Sparkles className="h-3 w-3 mr-1" />
+                    Daily Bonus
+                  </Button>
                 </div>
               </div>
               
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div className="text-center p-4 bg-primary/10 rounded-lg">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <div className="text-center p-4 bg-primary/10 rounded-lg hover-lift">
                   <div className="text-2xl font-bold text-primary">1,247</div>
                   <div className="text-sm text-muted-foreground">Spells Mastered</div>
                 </div>
-                <div className="text-center p-4 bg-accent/10 rounded-lg">
+                <div className="text-center p-4 bg-accent/10 rounded-lg hover-lift">
                   <div className="text-2xl font-bold text-accent">89</div>
                   <div className="text-sm text-muted-foreground">Missions Complete</div>
                 </div>
-                <div className="text-center p-4 bg-hero-blue/10 rounded-lg">
+                <div className="text-center p-4 bg-hero-blue/10 rounded-lg hover-lift">
                   <div className="text-2xl font-bold text-hero-blue">156</div>
                   <div className="text-sm text-muted-foreground">Heroes Saved</div>
+                </div>
+                <div className="text-center p-4 bg-magic-green/10 rounded-lg hover-lift">
+                  <div className="text-2xl font-bold text-magic-green">42</div>
+                  <div className="text-sm text-muted-foreground">Achievements</div>
                 </div>
               </div>
             </div>
@@ -170,26 +194,38 @@ const Dashboard = () => {
             {/* Quick Access Grid */}
             <div>
               <h2 className="text-2xl font-bold mb-6 flex items-center gap-2">
-                <Zap className="h-6 w-6 text-accent" />
-                Quick Access
+                <Zap className="h-6 w-6 text-accent shimmer" />
+                Quick Access Portal
               </h2>
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
-                {quickAccessCards.map((card) => {
+                {quickAccessCards.map((card, index) => {
                   const Icon = card.icon;
                   return (
                     <Card 
                       key={card.title}
-                      className="p-6 magic-card cursor-pointer group"
+                      className="p-6 magic-card cursor-pointer group hover-lift"
                       onClick={() => setActiveModule(card.module)}
+                      style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 magical-glow`}>
                         <Icon className="h-6 w-6 text-white" />
                       </div>
-                      <h3 className="text-lg font-semibold mb-2">{card.title}</h3>
+                      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{card.title}</h3>
                       <p className="text-muted-foreground text-sm">{card.description}</p>
                     </Card>
                   );
                 })}
+              </div>
+            </div>
+
+            {/* Enhanced Info Widgets */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+              <div className="lg:col-span-2 space-y-6">
+                <NewsSection />
+              </div>
+              <div className="space-y-6">
+                <WeatherWidget />
+                <ActivityFeed />
               </div>
             </div>
           </div>
