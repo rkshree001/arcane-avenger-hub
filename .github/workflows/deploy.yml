@@ -21,7 +21,7 @@ jobs:
 
       - name: Install dependencies
         working-directory: HarryPotterMarvelSite
-        run: npm ci
+        run: npm install
 
       - name: Build
         working-directory: HarryPotterMarvelSite
@@ -32,3 +32,5 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: HarryPotterMarvelSite/dist
+          # 👇 Make sure the Pages branch is set correctly
+          publish_branch: gh-pages
