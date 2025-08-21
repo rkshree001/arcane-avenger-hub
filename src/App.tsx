@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Toaster } from '@/components/ui/sonner';
 import SplashScreen from '@/components/SplashScreen';
 import AuthPage from '@/components/AuthPage';
+import Dashboard from '@/components/Dashboard';
 import { useAuth } from '@/hooks/useAuth';
 import { useState, useEffect } from 'react';
 
@@ -33,54 +34,6 @@ const PublicRoute = ({ children }: { children: React.ReactNode }) => {
   }
   
   return isAuthenticated ? <Navigate to="/dashboard" replace /> : <>{children}</>;
-};
-
-// Simple Dashboard
-const SimpleDashboard = () => {
-  const { user, signOut, isGuest } = useAuth();
-  
-  return (
-    <div className="min-h-screen bg-background p-8">
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-card p-8 rounded-lg border">
-          <h1 className="text-4xl font-bold text-primary mb-4">Magical Heroes Dashboard</h1>
-          <p className="text-muted-foreground mb-6">
-            {isGuest ? 'Welcome, Guest Explorer!' : `Welcome back, ${user?.email}!`}
-          </p>
-          
-          {isGuest && (
-            <div className="mb-6 p-4 bg-accent/10 border border-accent/20 rounded-lg">
-              <p className="text-sm text-accent">
-                🎭 You're exploring as a guest. Sign up to save your progress and unlock all features!
-              </p>
-            </div>
-          )}
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div className="bg-primary/10 p-6 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-primary">42</h3>
-              <p className="text-muted-foreground">Spells Mastered</p>
-            </div>
-            <div className="bg-accent/10 p-6 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-accent">15</h3>
-              <p className="text-muted-foreground">Missions Complete</p>
-            </div>
-            <div className="bg-primary/10 p-6 rounded-lg text-center">
-              <h3 className="text-2xl font-bold text-primary">8</h3>
-              <p className="text-muted-foreground">Level</p>
-            </div>
-          </div>
-          
-          <button 
-            onClick={signOut}
-            className="px-6 py-3 bg-destructive text-destructive-foreground rounded-lg hover:opacity-90"
-          >
-            Sign Out
-          </button>
-        </div>
-      </div>
-    </div>
-  );
 };
 
 function App() {
@@ -122,7 +75,7 @@ const AppContent = () => {
         } />
         <Route path="/dashboard" element={
           <ProtectedRoute>
-            <SimpleDashboard />
+            <Dashboard />
           </ProtectedRoute>
         } />
         <Route path="*" element={<Navigate to="/" replace />} />
