@@ -2,41 +2,73 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+/* Magical-Superhero Design System - Harry Potter + Marvel Theme
 All colors MUST be HSL.
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Base Theme - Mystical Night */
+    --background: 240 25% 6%;
+    --foreground: 45 100% 85%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    /* Card & Surface Colors */
+    --card: 240 20% 8%;
+    --card-foreground: 45 100% 85%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 240 20% 10%;
+    --popover-foreground: 45 100% 85%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Primary - Hogwarts Gold */
+    --primary: 45 100% 65%;
+    --primary-foreground: 240 25% 6%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    /* Secondary - Mystical Purple */
+    --secondary: 270 40% 25%;
+    --secondary-foreground: 45 100% 85%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    /* Muted - Dark Magic */
+    --muted: 240 15% 15%;
+    --muted-foreground: 240 10% 60%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Accent - Iron Man Red */
+    --accent: 5 85% 60%;
+    --accent-foreground: 240 25% 6%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Superhero Blue */
+    --hero-blue: 220 100% 55%;
+    --hero-blue-foreground: 240 25% 6%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Magical Green */
+    --magic-green: 140 60% 45%;
+    --magic-green-foreground: 240 25% 6%;
 
-    --radius: 0.5rem;
+    /* Destructive - Dark Arts Red */
+    --destructive: 0 75% 45%;
+    --destructive-foreground: 45 100% 85%;
+
+    /* Interactive Elements */
+    --border: 240 20% 20%;
+    --input: 240 20% 12%;
+    --ring: 45 100% 65%;
+
+    --radius: 0.75rem;
+
+    /* Custom Gradients */
+    --gradient-magical: linear-gradient(135deg, hsl(270 60% 30%), hsl(240 40% 15%));
+    --gradient-superhero: linear-gradient(135deg, hsl(220 100% 55%), hsl(5 85% 60%));
+    --gradient-cosmic: linear-gradient(45deg, hsl(240 25% 6%), hsl(270 40% 15%), hsl(220 60% 20%));
+    --gradient-gold: linear-gradient(135deg, hsl(45 100% 65%), hsl(35 100% 55%));
+    
+    /* Magical Effects */
+    --glow-magical: 0 0 20px hsl(45 100% 65% / 0.5);
+    --glow-superhero: 0 0 20px hsl(220 100% 55% / 0.5);
+    --glow-energy: 0 0 30px hsl(5 85% 60% / 0.6);
+    
+    /* Shadows */
+    --shadow-magical: 0 10px 25px hsl(270 40% 15% / 0.5);
+    --shadow-card: 0 8px 32px hsl(240 25% 3% / 0.8);
+    --shadow-hero: 0 12px 40px hsl(220 100% 20% / 0.4);
 
     --sidebar-background: 0 0% 98%;
 
@@ -100,6 +132,129 @@ All colors MUST be HSL.
   }
 
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-sans;
+    background: var(--gradient-cosmic);
+    min-height: 100vh;
+  }
+}
+
+@layer components {
+  /* Magical Button Variants */
+  .btn-magical {
+    @apply bg-gradient-to-r from-primary to-accent text-primary-foreground px-6 py-3 rounded-lg font-semibold;
+    @apply transition-all duration-300 hover:scale-105 active:scale-95;
+    box-shadow: var(--glow-magical);
+  }
+
+  .btn-superhero {
+    @apply bg-gradient-to-r from-hero-blue to-accent text-hero-blue-foreground px-6 py-3 rounded-lg font-semibold;
+    @apply transition-all duration-300 hover:scale-105 active:scale-95;
+    box-shadow: var(--glow-superhero);
+  }
+
+  /* Magical Effects */
+  .magical-glow {
+    box-shadow: var(--glow-magical);
+  }
+
+  .superhero-glow {
+    box-shadow: var(--glow-superhero);
+  }
+
+  .energy-glow {
+    box-shadow: var(--glow-energy);
+  }
+
+  /* Sparkle Animation */
+  .sparkle {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .sparkle::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, hsl(45 100% 65% / 0.3) 1px, transparent 1px);
+    background-size: 20px 20px;
+    animation: sparkle 3s linear infinite;
+  }
+
+  @keyframes sparkle {
+    0% { transform: translateX(-50%) translateY(-50%) rotate(0deg); }
+    100% { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+  }
+
+  /* Pulsing Energy Effect */
+  .pulse-energy {
+    animation: pulse-energy 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-energy {
+    0%, 100% { 
+      box-shadow: 0 0 20px hsl(220 100% 55% / 0.5);
+      transform: scale(1);
+    }
+    50% { 
+      box-shadow: 0 0 40px hsl(220 100% 55% / 0.8);
+      transform: scale(1.02);
+    }
+  }
+
+  /* Floating Animation */
+  .float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* Magical Card */
+  .magic-card {
+    @apply bg-card border border-border rounded-lg p-6;
+    background: linear-gradient(135deg, hsl(var(--card)), hsl(240 20% 12%));
+    box-shadow: var(--shadow-card);
+    transition: all 0.3s ease;
+  }
+
+  .magic-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-magical);
+  }
+
+  /* Hero Section Background */
+  .hero-bg {
+    background: var(--gradient-cosmic);
+    position: relative;
+  }
+
+  .hero-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 20% 80%, hsl(270 60% 30% / 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, hsl(5 85% 60% / 0.3) 0%, transparent 50%);
+  }
+
+  /* 3D Card Effects */
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+
+  .rotate-y-180 {
+    transform: rotateY(180deg);
   }
 }
