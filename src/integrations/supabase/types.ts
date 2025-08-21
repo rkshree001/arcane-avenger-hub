@@ -14,7 +14,259 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      guild_members: {
+        Row: {
+          contribution_points: number | null
+          guild_id: string
+          id: string
+          joined_at: string
+          role: string
+          user_id: string
+        }
+        Insert: {
+          contribution_points?: number | null
+          guild_id: string
+          id?: string
+          joined_at?: string
+          role?: string
+          user_id: string
+        }
+        Update: {
+          contribution_points?: number | null
+          guild_id?: string
+          id?: string
+          joined_at?: string
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "guild_members_guild_id_fkey"
+            columns: ["guild_id"]
+            isOneToOne: false
+            referencedRelation: "guilds"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      guilds: {
+        Row: {
+          created_at: string
+          description: string | null
+          id: string
+          leader_id: string | null
+          level: number | null
+          max_members: number | null
+          name: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          leader_id?: string | null
+          level?: number | null
+          max_members?: number | null
+          name: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          description?: string | null
+          id?: string
+          leader_id?: string | null
+          level?: number | null
+          max_members?: number | null
+          name?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string
+          display_name: string | null
+          guild_id: string | null
+          house: string | null
+          id: string
+          level: number | null
+          missions_completed: number | null
+          spells_mastered: number | null
+          team: string | null
+          total_points: number | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          guild_id?: string | null
+          house?: string | null
+          id?: string
+          level?: number | null
+          missions_completed?: number | null
+          spells_mastered?: number | null
+          team?: string | null
+          total_points?: number | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string
+          display_name?: string | null
+          guild_id?: string | null
+          house?: string | null
+          id?: string
+          level?: number | null
+          missions_completed?: number | null
+          spells_mastered?: number | null
+          team?: string | null
+          total_points?: number | null
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      quests: {
+        Row: {
+          created_at: string
+          description: string
+          difficulty: string
+          duration_hours: number
+          id: string
+          is_active: boolean | null
+          requirements: Json | null
+          rewards: Json
+          title: string
+          type: string
+        }
+        Insert: {
+          created_at?: string
+          description: string
+          difficulty: string
+          duration_hours?: number
+          id?: string
+          is_active?: boolean | null
+          requirements?: Json | null
+          rewards?: Json
+          title: string
+          type: string
+        }
+        Update: {
+          created_at?: string
+          description?: string
+          difficulty?: string
+          duration_hours?: number
+          id?: string
+          is_active?: boolean | null
+          requirements?: Json | null
+          rewards?: Json
+          title?: string
+          type?: string
+        }
+        Relationships: []
+      }
+      spells: {
+        Row: {
+          category: string
+          created_at: string
+          description: string
+          details: string | null
+          energy_type: string | null
+          id: string
+          image_url: string | null
+          incantation: string | null
+          name: string
+          power: number
+          range_info: string | null
+          rarity: string
+          source: string | null
+          speed_info: string | null
+          type: string
+          wand_movement: string | null
+        }
+        Insert: {
+          category: string
+          created_at?: string
+          description: string
+          details?: string | null
+          energy_type?: string | null
+          id?: string
+          image_url?: string | null
+          incantation?: string | null
+          name: string
+          power: number
+          range_info?: string | null
+          rarity: string
+          source?: string | null
+          speed_info?: string | null
+          type: string
+          wand_movement?: string | null
+        }
+        Update: {
+          category?: string
+          created_at?: string
+          description?: string
+          details?: string | null
+          energy_type?: string | null
+          id?: string
+          image_url?: string | null
+          incantation?: string | null
+          name?: string
+          power?: number
+          range_info?: string | null
+          rarity?: string
+          source?: string | null
+          speed_info?: string | null
+          type?: string
+          wand_movement?: string | null
+        }
+        Relationships: []
+      }
+      user_quests: {
+        Row: {
+          completed_at: string | null
+          created_at: string
+          id: string
+          progress: number | null
+          quest_id: string
+          started_at: string | null
+          status: string
+          user_id: string
+        }
+        Insert: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          progress?: number | null
+          quest_id: string
+          started_at?: string | null
+          status?: string
+          user_id: string
+        }
+        Update: {
+          completed_at?: string | null
+          created_at?: string
+          id?: string
+          progress?: number | null
+          quest_id?: string
+          started_at?: string | null
+          status?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_quests_quest_id_fkey"
+            columns: ["quest_id"]
+            isOneToOne: false
+            referencedRelation: "quests"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
     }
     Views: {
       [_ in never]: never
