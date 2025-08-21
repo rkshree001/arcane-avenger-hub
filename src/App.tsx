@@ -37,14 +37,24 @@ const PublicRoute = ({ children }: { children: React.ReactNode }) => {
 
 // Simple Dashboard
 const SimpleDashboard = () => {
-  const { user, signOut } = useAuth();
+  const { user, signOut, isGuest } = useAuth();
   
   return (
     <div className="min-h-screen bg-background p-8">
       <div className="max-w-4xl mx-auto">
         <div className="bg-card p-8 rounded-lg border">
           <h1 className="text-4xl font-bold text-primary mb-4">Magical Heroes Dashboard</h1>
-          <p className="text-muted-foreground mb-6">Welcome back, {user?.email}!</p>
+          <p className="text-muted-foreground mb-6">
+            {isGuest ? 'Welcome, Guest Explorer!' : `Welcome back, ${user?.email}!`}
+          </p>
+          
+          {isGuest && (
+            <div className="mb-6 p-4 bg-accent/10 border border-accent/20 rounded-lg">
+              <p className="text-sm text-accent">
+                🎭 You're exploring as a guest. Sign up to save your progress and unlock all features!
+              </p>
+            </div>
+          )}
           
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div className="bg-primary/10 p-6 rounded-lg text-center">

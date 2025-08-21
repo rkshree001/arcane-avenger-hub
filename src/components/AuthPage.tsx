@@ -150,6 +150,23 @@ const AuthPage = () => {
     }
   };
 
+  const handleGuestLogin = () => {
+    setIsLoading(true);
+    setMessage({ type: 'info', text: 'Welcome, guest! Exploring the magical world...' });
+    
+    // Store guest session in localStorage
+    localStorage.setItem('guest_session', 'true');
+    localStorage.setItem('guest_user', JSON.stringify({
+      id: 'guest-user',
+      email: 'guest@magical-heroes.demo',
+      display_name: 'Guest Explorer'
+    }));
+    
+    setTimeout(() => {
+      navigate('/dashboard');
+    }, 1500);
+  };
+
   return (
     <div className="min-h-screen hero-bg flex items-center justify-center p-4">
       {/* Background Effects */}
@@ -364,6 +381,25 @@ const AuthPage = () => {
               </form>
             </TabsContent>
           </Tabs>
+
+          {/* Guest Login Option */}
+          <div className="relative">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase">
+              <span className="bg-card px-2 text-muted-foreground">or</span>
+            </div>
+          </div>
+
+          <Button 
+            variant="outline" 
+            className="w-full"
+            onClick={handleGuestLogin}
+            disabled={isLoading}
+          >
+            {isLoading ? 'Loading...' : '✨ Continue as Guest'}
+          </Button>
 
           {/* Footer */}
           <div className="text-center">
