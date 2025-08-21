@@ -84,6 +84,15 @@ const SimpleDashboard = () => {
 };
 
 function App() {
+  return (
+    <Router>
+      <AppContent />
+    </Router>
+  );
+}
+
+// Separate component to handle splash screen inside Router context
+const AppContent = () => {
   const [showSplash, setShowSplash] = useState(true);
 
   useEffect(() => {
@@ -99,30 +108,28 @@ function App() {
   }
 
   return (
-    <Router>
-      <div className="min-h-screen">
-        <Routes>
-          <Route path="/" element={
-            <PublicRoute>
-              <Navigate to="/auth" replace />
-            </PublicRoute>
-          } />
-          <Route path="/auth" element={
-            <PublicRoute>
-              <AuthPage />
-            </PublicRoute>
-          } />
-          <Route path="/dashboard" element={
-            <ProtectedRoute>
-              <SimpleDashboard />
-            </ProtectedRoute>
-          } />
-          <Route path="*" element={<Navigate to="/" replace />} />
-        </Routes>
-        <Toaster />
-      </div>
-    </Router>
+    <div className="min-h-screen">
+      <Routes>
+        <Route path="/" element={
+          <PublicRoute>
+            <Navigate to="/auth" replace />
+          </PublicRoute>
+        } />
+        <Route path="/auth" element={
+          <PublicRoute>
+            <AuthPage />
+          </PublicRoute>
+        } />
+        <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <SimpleDashboard />
+          </ProtectedRoute>
+        } />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+      <Toaster />
+    </div>
   );
-}
+};
 
 export default App;
