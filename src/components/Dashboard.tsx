@@ -12,7 +12,8 @@ import {
   Settings,
   Home,
   Scroll,
-  Swords
+  Swords,
+  User
 } from 'lucide-react';
 import Sidebar from './Sidebar';
 import SpellsLibrary from './SpellsLibrary';
@@ -21,11 +22,21 @@ import HouseTeamModule from './HouseTeamModule';
 import TrainingModule from './TrainingModule';
 import LeaderboardModule from './LeaderboardModule';
 import GuildModule from './GuildModule';
+import ProfileModule from './ProfileModule';
+import HarryPotterModule from './HarryPotterModule';
+import MarvelModule from './MarvelModule';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('home');
 
   const quickAccessCards = [
+    {
+      title: 'Profile',
+      description: 'Manage your wizard and superhero identity',
+      icon: User,
+      color: 'from-primary to-accent',
+      module: 'profile'
+    },
     {
       title: 'Spells & Powers',
       description: 'Master magical spells and superhero abilities',
@@ -48,13 +59,6 @@ const Dashboard = () => {
       module: 'sorting'
     },
     {
-      title: 'Leaderboard',
-      description: 'See top wizards and heroes',
-      icon: Trophy,
-      color: 'from-magic-green to-primary',
-      module: 'leaderboard'
-    },
-    {
       title: 'Training Arena',
       description: 'Practice spells and powers',
       icon: Swords,
@@ -62,11 +66,32 @@ const Dashboard = () => {
       module: 'training'
     },
     {
+      title: 'Leaderboard',
+      description: 'See top wizards and heroes',
+      icon: Trophy,
+      color: 'from-magic-green to-primary',
+      module: 'leaderboard'
+    },
+    {
       title: 'Guild Hall',
       description: 'Connect with other heroes',
       icon: Users,
       color: 'from-primary to-hero-blue',
       module: 'guild'
+    },
+    {
+      title: 'Harry Potter',
+      description: 'Explore the wizarding world',
+      icon: BookOpen,
+      color: 'from-primary to-magic-green',
+      module: 'harry-potter'
+    },
+    {
+      title: 'Marvel Heroes',
+      description: 'Discover superhero adventures',
+      icon: Zap,
+      color: 'from-hero-blue to-accent',
+      module: 'marvel'
     }
   ];
 
@@ -84,6 +109,12 @@ const Dashboard = () => {
         return <LeaderboardModule />;
       case 'guild':
         return <GuildModule />;
+      case 'profile':
+        return <ProfileModule />;
+      case 'harry-potter':
+        return <HarryPotterModule />;
+      case 'marvel':
+        return <MarvelModule />;
       case 'home':
       default:
         return (

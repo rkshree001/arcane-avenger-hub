@@ -10,7 +10,10 @@ import {
   Settings,
   LogOut,
   Sparkles,
-  Swords
+  Swords,
+  User,
+  BookOpen,
+  Zap
 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
@@ -24,12 +27,15 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
 
   const navigationItems = [
     { id: 'home', label: 'Dashboard', icon: Home },
+    { id: 'profile', label: 'Profile', icon: User },
     { id: 'spells', label: 'Spells & Powers', icon: Wand2 },
     { id: 'quests', label: 'Quests & Missions', icon: Scroll },
     { id: 'sorting', label: 'House & Team', icon: Shield },
     { id: 'training', label: 'Training Arena', icon: Swords },
     { id: 'leaderboard', label: 'Leaderboard', icon: Trophy },
     { id: 'guild', label: 'Guild Hall', icon: Users },
+    { id: 'harry-potter', label: 'Harry Potter', icon: BookOpen },
+    { id: 'marvel', label: 'Marvel Heroes', icon: Zap },
   ];
 
   const handleLogout = () => {
