@@ -194,10 +194,10 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-screen flex bg-background">
       <Sidebar activeModule={activeModule} setActiveModule={setActiveModule} />
       
-      <main className="flex-1 p-6 ml-64">
+      <main className="flex-1 p-6 ml-72 overflow-y-auto">
         {renderContent()}
       </main>
     </div>

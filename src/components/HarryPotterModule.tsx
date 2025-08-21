@@ -23,14 +23,50 @@ const HarryPotterModule = () => {
   const mainStory = {
     title: "The Boy Who Lived",
     description: "Follow Harry Potter's magical journey from discovering he's a wizard to defeating the dark lord Voldemort and saving the wizarding world.",
+    fullStory: "Harry Potter's story begins on a dark night in 1981 when the dark wizard Lord Voldemort murdered Harry's parents, James and Lily Potter, in their home at Godric's Hollow. However, when Voldemort tried to kill baby Harry with the Killing Curse, the spell backfired due to his mother's sacrificial protection, destroying Voldemort's body and leaving Harry with only a lightning bolt-shaped scar on his forehead. This made Harry famous throughout the wizarding world as 'The Boy Who Lived.' Harry was then raised by his muggle relatives, the Dursleys, who treated him poorly and kept his magical heritage a secret. On his 11th birthday, Harry discovered he was a wizard when Hagrid, the Keeper of Keys and Grounds at Hogwarts, came to deliver his Hogwarts letter. At Hogwarts School of Witchcraft and Wizardry, Harry was sorted into Gryffindor House and quickly became best friends with Ron Weasley and Hermione Granger. Throughout his seven years at Hogwarts, Harry faced numerous challenges and adventures, from protecting the Philosopher's Stone to battling a basilisk in the Chamber of Secrets. As Harry grew older, he learned more about Voldemort's return to power and his own connection to the dark lord through their shared blood from that fateful night. Harry discovered that he was an accidental Horcrux - a fragment of Voldemort's soul lived within him. In his final year, Harry, Ron, and Hermione embarked on a dangerous quest to find and destroy Voldemort's remaining Horcruxes, ultimately leading to the Battle of Hogwarts. In a moment of incredible bravery and sacrifice, Harry willingly walked into the Forbidden Forest to face Voldemort, allowing himself to be struck by the Killing Curse to destroy the Horcrux within him. However, Harry survived due to his mother's protection still flowing in Voldemort's veins, and in the final confrontation, Voldemort's own Killing Curse rebounded upon him, destroying him once and for all. Harry's story is ultimately one of love triumphing over evil, the power of friendship, and the importance of choosing what is right over what is easy.",
     books: [
-      { title: "Philosopher's Stone", year: "Year 1", description: "Harry discovers he's a wizard and starts at Hogwarts" },
-      { title: "Chamber of Secrets", year: "Year 2", description: "The heir of Slytherin opens the Chamber of Secrets" },
-      { title: "Prisoner of Azkaban", year: "Year 3", description: "Sirius Black escapes from Azkaban prison" },
-      { title: "Goblet of Fire", year: "Year 4", description: "Harry competes in the dangerous Triwizard Tournament" },
-      { title: "Order of the Phoenix", year: "Year 5", description: "The wizarding world denies Voldemort's return" },
-      { title: "Half-Blood Prince", year: "Year 6", description: "Harry learns about Voldemort's past and Horcruxes" },
-      { title: "Deathly Hallows", year: "Year 7", description: "The final battle between good and evil" }
+      { 
+        title: "Philosopher's Stone", 
+        year: "Year 1", 
+        description: "Harry discovers he's a wizard and starts at Hogwarts",
+        story: "Harry learns about his magical heritage, makes his first friends, and helps protect the Philosopher's Stone from falling into the wrong hands. He faces Professor Quirrell, who was possessed by Voldemort, and prevents the Dark Lord from returning to full power."
+      },
+      { 
+        title: "Chamber of Secrets", 
+        year: "Year 2", 
+        description: "The heir of Slytherin opens the Chamber of Secrets",
+        story: "A mysterious monster petrifies students at Hogwarts, and Harry discovers he can speak to snakes. He enters the Chamber of Secrets to save Ginny Weasley and faces a memory of young Tom Riddle (Voldemort) and a basilisk, destroying both with Godric Gryffindor's sword and Fawkes the phoenix's help."
+      },
+      { 
+        title: "Prisoner of Azkaban", 
+        year: "Year 3", 
+        description: "Sirius Black escapes from Azkaban prison",
+        story: "Harry believes Sirius Black wants to kill him, but discovers that Sirius is actually his innocent godfather who was framed by Peter Pettigrew. Harry learns the truth about his parents' death and saves both Sirius and Buckbeak using a Time-Turner with Hermione's help."
+      },
+      { 
+        title: "Goblet of Fire", 
+        year: "Year 4", 
+        description: "Harry competes in the dangerous Triwizard Tournament",
+        story: "Harry is mysteriously entered into the Triwizard Tournament despite being underage. Through three dangerous tasks, he faces dragons, merpeople, and a deadly maze. The tournament is revealed to be a trap set by Voldemort, who returns to physical form and kills Cedric Diggory."
+      },
+      { 
+        title: "Order of the Phoenix", 
+        year: "Year 5", 
+        description: "The wizarding world denies Voldemort's return",
+        story: "Harry faces disbelief about Voldemort's return while dealing with the tyrannical Professor Umbridge. He forms Dumbledore's Army to teach students defense against the dark arts. The year culminates in the Battle of the Department of Mysteries, where Sirius Black is killed by Bellatrix Lestrange."
+      },
+      { 
+        title: "Half-Blood Prince", 
+        year: "Year 6", 
+        description: "Harry learns about Voldemort's past and Horcruxes",
+        story: "Harry learns about Tom Riddle's past through Dumbledore's memories and discovers the concept of Horcruxes - objects containing fragments of Voldemort's soul. The year ends tragically with Dumbledore's death at the hands of Severus Snape atop the Astronomy Tower."
+      },
+      { 
+        title: "Deathly Hallows", 
+        year: "Year 7", 
+        description: "The final battle between good and evil",
+        story: "Harry, Ron, and Hermione leave Hogwarts to hunt for the remaining Horcruxes. They learn about the Deathly Hallows and face their greatest challenges yet. The story culminates in the Battle of Hogwarts, where Harry makes the ultimate sacrifice to defeat Voldemort once and for all, saving the wizarding world."
+      }
     ]
   };
 
@@ -213,6 +249,14 @@ const HarryPotterModule = () => {
             </div>
           </Card>
 
+          {/* Full Story */}
+          <Card className="magic-card">
+            <h3 className="text-2xl font-bold mb-4">The Complete Story</h3>
+            <p className="text-muted-foreground leading-relaxed text-justify">
+              {mainStory.fullStory}
+            </p>
+          </Card>
+
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
             {mainStory.books.map((book, index) => (
               <Card key={index} className="magic-card hover:scale-105 transition-transform duration-300">
@@ -225,6 +269,11 @@ const HarryPotterModule = () => {
                   </div>
                   <h3 className="font-bold text-lg">{book.title}</h3>
                   <p className="text-sm text-muted-foreground">{book.description}</p>
+                  {book.story && (
+                    <p className="text-xs text-muted-foreground/80 leading-relaxed">
+                      {book.story}
+                    </p>
+                  )}
                 </div>
               </Card>
             ))}

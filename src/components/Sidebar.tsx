@@ -1,8 +1,9 @@
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { supabase } from '@/integrations/supabase/client';
 import { 
   Home, 
-  Wand2, 
+  Wand2,
   Scroll, 
   Shield, 
   Trophy, 
@@ -38,15 +39,20 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
     { id: 'marvel', label: 'Marvel Heroes', icon: Zap },
   ];
 
-  const handleLogout = () => {
-    navigate('/login');
+  const handleLogout = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Error signing out:', error);
+    } else {
+      navigate('/auth');
+    }
   };
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-card border-r border-border magic-card">
-      <div className="p-6">
+    <aside className="fixed left-0 top-0 h-full w-72 bg-sidebar-background border-r border-sidebar-border magic-card shadow-xl z-30">
+      <div className="flex flex-col h-full p-6">
         {/* Logo Section */}
-        <div className="flex items-center gap-3 mb-8">
+        <div className="flex items-center gap-3 mb-8 pb-4 border-b border-sidebar-border">
           <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-primary to-accent flex items-center justify-center">
             <Sparkles className="h-5 w-5 text-primary-foreground" />
           </div>
@@ -58,7 +64,7 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
         </div>
 
         {/* User Profile */}
-        <div className="mb-8 p-4 bg-muted/20 rounded-lg">
+        <div className="mb-8 p-4 bg-sidebar-accent rounded-lg">
           <div className="flex items-center gap-3">
             <Avatar className="h-10 w-10 border border-primary">
               <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground font-bold">
@@ -66,14 +72,14 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
               </AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-semibold text-sm">Magical Hero</div>
-              <div className="text-xs text-muted-foreground">Level 42 Wizard</div>
+              <div className="font-semibold text-sm text-sidebar-foreground">Magical Hero</div>
+              <div className="text-xs text-sidebar-foreground/70">Level 42 Wizard</div>
             </div>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="space-y-2">
+        <nav className="space-y-2 flex-1 overflow-y-auto">
           {navigationItems.map((item) => {
             const Icon = item.icon;
             const isActive = activeModule === item.id;
@@ -82,15 +88,15 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
               <Button
                 key={item.id}
                 variant={isActive ? 'default' : 'ghost'}
-                className={`w-full justify-start gap-3 transition-all duration-200 ${
+                className={`w-full justify-start gap-3 h-12 transition-all duration-200 ${
                   isActive 
-                    ? 'bg-gradient-to-r from-primary/30 to-accent/30 border border-primary/50 text-primary-foreground font-semibold magical-glow' 
-                    : 'hover:bg-muted/50 text-foreground'
+                    ? 'bg-sidebar-primary text-sidebar-primary-foreground font-semibold magical-glow shadow-md' 
+                    : 'text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground'
                 }`}
                 onClick={() => setActiveModule(item.id)}
               >
-                <Icon className={`h-4 w-4 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground'}`} />
-                <span className={`${isActive ? 'text-primary-foreground font-semibold' : 'text-foreground'}`}>
+                <Icon className={`h-5 w-5 ${isActive ? 'text-sidebar-primary-foreground' : 'text-sidebar-foreground/70'}`} />
+                <span className={`${isActive ? 'text-sidebar-primary-foreground font-semibold' : 'text-sidebar-foreground'}`}>
                   {item.label}
                 </span>
               </Button>
@@ -99,22 +105,22 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
         </nav>
 
         {/* Bottom Actions */}
-        <div className="absolute bottom-6 left-6 right-6 space-y-2">
+        <div className="pt-4 border-t border-sidebar-border space-y-2">
           <Button 
             variant="ghost" 
-            className="w-full justify-start gap-3 hover:bg-muted/50"
+            className="w-full justify-start gap-3 h-12 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground"
             onClick={() => setActiveModule('settings')}
           >
-            <Settings className="h-4 w-4 text-muted-foreground" />
+            <Settings className="h-5 w-5 text-sidebar-foreground/70" />
             <span>Settings</span>
           </Button>
           
           <Button 
             variant="ghost" 
-            className="w-full justify-start gap-3 hover:bg-destructive/10 hover:text-destructive"
+            className="w-full justify-start gap-3 h-12 text-sidebar-foreground hover:bg-destructive/10 hover:text-destructive"
             onClick={handleLogout}
           >
-            <LogOut className="h-4 w-4" />
+            <LogOut className="h-5 w-5" />
             <span>Logout</span>
           </Button>
         </div>
