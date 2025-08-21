@@ -16,6 +16,11 @@ import {
 } from 'lucide-react';
 import Sidebar from './Sidebar';
 import SpellsLibrary from './SpellsLibrary';
+import QuestsModule from './QuestsModule';
+import HouseTeamModule from './HouseTeamModule';
+import TrainingModule from './TrainingModule';
+import LeaderboardModule from './LeaderboardModule';
+import GuildModule from './GuildModule';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('home');
@@ -69,6 +74,16 @@ const Dashboard = () => {
     switch (activeModule) {
       case 'spells':
         return <SpellsLibrary />;
+      case 'quests':
+        return <QuestsModule />;
+      case 'sorting':
+        return <HouseTeamModule />;
+      case 'training':
+        return <TrainingModule />;
+      case 'leaderboard':
+        return <LeaderboardModule />;
+      case 'guild':
+        return <GuildModule />;
       case 'home':
       default:
         return (

@@ -78,13 +78,13 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
                 variant={isActive ? 'default' : 'ghost'}
                 className={`w-full justify-start gap-3 transition-all duration-200 ${
                   isActive 
-                    ? 'bg-gradient-to-r from-primary/20 to-accent/20 border border-primary/30 magical-glow' 
-                    : 'hover:bg-muted/50'
+                    ? 'bg-gradient-to-r from-primary/30 to-accent/30 border border-primary/50 text-primary-foreground font-semibold magical-glow' 
+                    : 'hover:bg-muted/50 text-foreground'
                 }`}
                 onClick={() => setActiveModule(item.id)}
               >
-                <Icon className={`h-4 w-4 ${isActive ? 'text-primary' : 'text-muted-foreground'}`} />
-                <span className={isActive ? 'text-primary font-medium' : 'text-foreground'}>
+                <Icon className={`h-4 w-4 ${isActive ? 'text-primary-foreground' : 'text-muted-foreground'}`} />
+                <span className={`${isActive ? 'text-primary-foreground font-semibold' : 'text-foreground'}`}>
                   {item.label}
                 </span>
               </Button>
