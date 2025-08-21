@@ -1,6 +1,6 @@
 import { Button } from '@/components/ui/button';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
-import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/hooks/useAuth';
 import { 
   Home, 
   Wand2,
@@ -16,7 +16,6 @@ import {
   BookOpen,
   Zap
 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
 
 interface SidebarProps {
   activeModule: string;
@@ -24,7 +23,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
-  const navigate = useNavigate();
+  const { user, signOut, isGuest } = useAuth();
 
   const navigationItems = [
     { id: 'home', label: 'Dashboard', icon: Home },
@@ -39,13 +38,8 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
     { id: 'marvel', label: 'Marvel Heroes', icon: Zap },
   ];
 
-  const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error('Error signing out:', error);
-    } else {
-      navigate('/auth');
-    }
+  const handleLogout = () => {
+    signOut();
   };
 
   return (
@@ -72,8 +66,12 @@ const Sidebar = ({ activeModule, setActiveModule }: SidebarProps) => {
               </AvatarFallback>
             </Avatar>
             <div>
-              <div className="font-semibold text-sm text-sidebar-foreground">Magical Hero</div>
-              <div className="text-xs text-sidebar-foreground/70">Level 42 Wizard</div>
+              <div className="font-semibold text-sm text-sidebar-foreground">
+                {isGuest ? 'Guest Explorer' : user?.email?.split('@')[0] || 'Magical Hero'}
+              </div>
+              <div className="text-xs text-sidebar-foreground/70">
+                {isGuest ? 'Exploring Mode' : 'Level 42 Wizard'}
+              </div>
             </div>
           </div>
         </div>
