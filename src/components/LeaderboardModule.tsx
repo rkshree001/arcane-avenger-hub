@@ -1,6 +1,7 @@
 import { Card } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Avatar, AvatarFallback } from '@/components/ui/avatar';
+import { Button } from '@/components/ui/button';
 import { 
   Trophy, 
   Crown, 
@@ -11,7 +12,9 @@ import {
   Sword,
   TrendingUp,
   TrendingDown,
-  Minus
+  Minus,
+  Wand2,
+  Sparkles
 } from 'lucide-react';
 
 const LeaderboardModule = () => {
@@ -200,55 +203,115 @@ const LeaderboardModule = () => {
   };
 
   return (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="magic-card">
-        <div className="flex items-center gap-3 mb-4">
-          <Trophy className="h-8 w-8 text-primary" />
-          <h1 className="text-3xl font-bold bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+    <div className="space-y-8 p-4 lg:p-8">
+      {/* Enhanced Header */}
+      <div className="text-center space-y-4 particles relative">
+        <div className="flex items-center justify-center gap-3 levitate">
+          <Trophy className="h-8 w-8 text-primary magical-glow" />
+          <h1 className="text-3xl lg:text-4xl font-bold text-glow bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
             Leaderboard
           </h1>
+          <Crown className="h-8 w-8 text-accent energy-glow" />
         </div>
-        <p className="text-muted-foreground text-lg">
-          See the top wizards and heroes across all realms
+        <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+          Ranking of top wizards and superheroes with magical borders and glowing effects
         </p>
+        <div className="flex justify-center gap-4 mt-6 flex-wrap">
+          <Button variant="outline" className="magical-glow">
+            <Wand2 className="h-4 w-4 mr-2" />
+            Wizards
+          </Button>
+          <Button variant="outline" className="superhero-glow">
+            <Shield className="h-4 w-4 mr-2" />
+            Heroes
+          </Button>
+          <Button variant="outline" className="energy-glow">
+            <Zap className="h-4 w-4 mr-2" />
+            All Time
+          </Button>
+        </div>
       </div>
 
-      {/* Top 3 Podium */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-        {topPlayers.slice(0, 3).map((player, index) => (
-          <Card key={player.rank} className={`magic-card text-center ${index === 0 ? 'md:order-2 scale-105' : index === 1 ? 'md:order-1' : 'md:order-3'}`}>
-            <div className="space-y-4">
-              <div className={`mx-auto w-16 h-16 rounded-full bg-gradient-to-br ${
-                index === 0 ? 'from-yellow-400 to-yellow-600' : 
-                index === 1 ? 'from-gray-300 to-gray-500' : 
-                'from-yellow-600 to-yellow-800'
-              } flex items-center justify-center text-white text-xl font-bold`}>
-                {getRankIcon(player.rank)}
+      {/* Enhanced Top 3 Podium */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        {topPlayers.slice(0, 3).map((player, index) => {
+          const positions = [1, 0, 2]; // Center the #1 player
+          const actualIndex = positions[index];
+          const actualPlayer = topPlayers[actualIndex];
+          
+          return (
+            <Card key={actualPlayer.rank} className={`p-6 text-center relative overflow-hidden ${
+              actualPlayer.rank === 1 
+                ? 'ring-2 ring-primary magical-glow shimmer md:scale-110' 
+                : actualPlayer.rank === 2 
+                ? 'ring-2 ring-accent superhero-glow md:scale-105' 
+                : 'ring-2 ring-magic-green energy-glow'
+            }`}>
+              {/* Magical background effect */}
+              <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-accent/5 pointer-events-none"></div>
+              
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 z-10">
+                {actualPlayer.rank === 1 && (
+                  <div className="bg-primary text-primary-foreground w-12 h-12 rounded-full flex items-center justify-center shadow-lg levitate">
+                    <Crown className="h-6 w-6" />
+                  </div>
+                )}
+                {actualPlayer.rank === 2 && (
+                  <div className="bg-accent text-accent-foreground w-10 h-10 rounded-full flex items-center justify-center shadow-lg float">
+                    <Medal className="h-5 w-5" />
+                  </div>
+                )}
+                {actualPlayer.rank === 3 && (
+                  <div className="bg-magic-green text-magic-green-foreground w-10 h-10 rounded-full flex items-center justify-center shadow-lg pulse-energy">
+                    <Star className="h-5 w-5" />
+                  </div>
+                )}
               </div>
-              <Avatar className="mx-auto h-16 w-16 border-2 border-primary">
-                <AvatarFallback className="bg-gradient-to-br from-primary to-accent text-primary-foreground text-lg font-bold">
-                  {player.avatar}
+              
+              <Avatar className={`w-20 h-20 mx-auto mb-4 mt-6 ring-4 ${
+                actualPlayer.rank === 1 ? 'ring-primary/50' : 
+                actualPlayer.rank === 2 ? 'ring-accent/50' : 'ring-magic-green/50'
+              }`}>
+                <AvatarFallback className="text-lg font-bold bg-gradient-to-br from-primary to-accent text-white">
+                  {actualPlayer.name.split(' ').map(n => n[0]).join('')}
                 </AvatarFallback>
               </Avatar>
-              <div>
-                <h3 className="font-bold text-lg">{player.name}</h3>
-                <p className="text-sm text-muted-foreground">Level {player.level}</p>
-                <div className="flex items-center justify-center gap-4 mt-2 text-sm">
-                  <span className={getHouseColor(player.house)}>{player.house}</span>
-                  <span className={getTeamColor(player.team)}>{player.team}</span>
+              
+              <h3 className="font-bold text-lg mb-3 text-glow">{actualPlayer.name}</h3>
+              <div className="space-y-3">
+                <div className="flex items-center justify-center gap-2">
+                  <Sparkles className="h-5 w-5 text-primary" />
+                  <span className="text-2xl font-bold text-primary">{actualPlayer.points.toLocaleString()}</span>
+                  <span className="text-sm text-muted-foreground">XP</span>
                 </div>
-                <div className="text-2xl font-bold text-primary mt-2">
-                  {player.points.toLocaleString()}
+                <Badge 
+                  variant="secondary" 
+                  className={`${
+                    actualPlayer.rank === 1 ? 'bg-primary/20 text-primary border-primary/30' :
+                    actualPlayer.rank === 2 ? 'bg-accent/20 text-accent border-accent/30' :
+                    'bg-magic-green/20 text-magic-green border-magic-green/30'
+                  }`}
+                >
+                  Level {actualPlayer.level}
+                </Badge>
+                <div className="flex items-center justify-center gap-2">
+                  {getTrendIcon(actualPlayer.trend)}
+                  <span className="text-sm capitalize font-medium">{actualPlayer.trend} this week</span>
                 </div>
-                <div className="flex items-center justify-center gap-1 mt-1">
-                  {getTrendIcon(player.trend)}
-                  <span className="text-xs text-muted-foreground">This week</span>
+                <div className="grid grid-cols-2 gap-2 mt-4 text-xs">
+                  <div className="text-center p-2 bg-muted/20 rounded">
+                    <div className="font-bold text-sm">{actualPlayer.achievements}</div>
+                    <div className="text-muted-foreground">Achievements</div>
+                  </div>
+                  <div className="text-center p-2 bg-muted/20 rounded">
+                    <div className="font-bold text-sm">{actualPlayer.spellsMastered}</div>
+                    <div className="text-muted-foreground">Spells</div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </Card>
-        ))}
+            </Card>
+          );
+        })}
       </div>
 
       {/* Full Leaderboard */}

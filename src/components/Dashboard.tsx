@@ -19,7 +19,8 @@ import {
   Menu,
   Sparkles,
   Clock,
-  Bell
+  Bell,
+  Search
 } from 'lucide-react';
 import Sidebar from './Sidebar';
 import SpellsLibrary from './SpellsLibrary';
@@ -34,6 +35,8 @@ import MarvelModule from './MarvelModule';
 import NewsSection from './NewsSection';
 import WeatherWidget from './WeatherWidget';
 import ActivityFeed from './ActivityFeed';
+import NotificationSystem from './NotificationSystem';
+import SearchBar from './SearchBar';
 
 const Dashboard = () => {
   const [activeModule, setActiveModule] = useState('home');
@@ -128,7 +131,18 @@ const Dashboard = () => {
       case 'home':
       default:
         return (
-          <div className="space-y-8">
+          <div className="space-y-6 lg:space-y-8">
+            {/* Top Bar with Search and Notifications */}
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mb-6">
+              <SearchBar />
+              <div className="flex items-center gap-2">
+                <NotificationSystem />
+                <Button variant="ghost" size="icon" className="magical-glow">
+                  <Settings className="h-5 w-5" />
+                </Button>
+              </div>
+            </div>
+
             {/* Enhanced Welcome Section */}
             <div className="magic-card particles">
               <div className="flex flex-col sm:flex-row items-center gap-4 sm:gap-6 mb-6">
@@ -203,15 +217,15 @@ const Dashboard = () => {
                   return (
                     <Card 
                       key={card.title}
-                      className="p-6 magic-card cursor-pointer group hover-lift"
+                      className="p-4 lg:p-6 magic-card cursor-pointer group hover-lift"
                       onClick={() => setActiveModule(card.module)}
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <div className={`w-12 h-12 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 magical-glow`}>
-                        <Icon className="h-6 w-6 text-white" />
+                      <div className={`w-10 h-10 lg:w-12 lg:h-12 rounded-lg bg-gradient-to-br ${card.color} flex items-center justify-center mb-3 lg:mb-4 group-hover:scale-110 transition-transform duration-300 magical-glow`}>
+                        <Icon className="h-5 w-5 lg:h-6 lg:w-6 text-white" />
                       </div>
-                      <h3 className="text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{card.title}</h3>
-                      <p className="text-muted-foreground text-sm">{card.description}</p>
+                      <h3 className="text-base lg:text-lg font-semibold mb-2 group-hover:text-primary transition-colors">{card.title}</h3>
+                      <p className="text-muted-foreground text-xs lg:text-sm">{card.description}</p>
                     </Card>
                   );
                 })}
@@ -265,7 +279,7 @@ const Dashboard = () => {
         </div>
       </div>
       
-      <main className="flex-1 p-4 lg:p-6 lg:ml-72 pt-20 lg:pt-6 overflow-y-auto">
+      <main className="flex-1 w-full p-4 lg:p-6 lg:ml-72 pt-20 lg:pt-6 overflow-x-hidden overflow-y-auto">
         {renderContent()}
       </main>
     </div>
